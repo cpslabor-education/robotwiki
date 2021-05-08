@@ -68,9 +68,14 @@ If you want to use RTPS interface, issue the following command:
 make px4_sitl_rtps gazebo
 ```
 
-YOu can interact with the Drone through the NuttX console. To start the MicroRTPS client on the system issue the following command:
+You can interact with the Drone through the NuttX console. To start the MicroRTPS client on the system issue the following command:
 ```bash
 micrortps_client start -t UDP
+```
+
+Takeoff drone:
+```
+commander takeoff
 ```
 
 ## ROS 2 interface
