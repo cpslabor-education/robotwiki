@@ -2,10 +2,10 @@
 
 ## Preliminaries
 
-### ARMv7l (e.g. BeagleBone)
+### ARMv7l (e.g. BeagleBone, RPi3) - ARMHF
 The latest official version of Debian as of 2021 May: __10.3 Buster__.
 
-For Beaglebone and other ARMHF (armv7l) systems: pull the following image:
+For Beaglebone and other ARMHF (armv7l) target systems, pull the following image:
 ```bash
 docker pull arm32v7/debian:buster
 ```
@@ -13,6 +13,29 @@ Start the VM:
 ```bash
 docker run --rm -it -v /home/kyberszittya/robotlabor/ros2-cross-vm-ws:/home/worker/cross-ws -w / debian:buster
 ```
+
+### ARM64v8 (e.g. RPi 4, Jetson Nano)
+The latest official version of Debian as of 2021 May: __10.3 Buster__.
+
+For Jetson Nano (arm64v8) target systems, pull the following image (Nano uses bionic):
+```bash
+docker pull arm64v8/ubuntu:bionic
+```
+Tag the VM as the following:
+```bash
+docker tag arm64v8/ubuntu:bionic jetson-nano/ubuntu:cross-compile
+```
+
+For other target systems capable of running Ubuntu 20.04 Focal (e.g. Raspberry Pi 4):
+```bash
+docker pull arm64v8/ubuntu:focal
+```
+
+Start the target VM (in the following example arm64v8/ubuntu:bionic for Jetson Nano):
+```bash
+docker run --rm -it -v /home/kyberszittya/robotlabor/ros2-cross-vm-ws:/home/worker/cross-ws -w / jetson-nano/ubuntu:cross-compile
+```
+
 
 ## Instructions to setup build system
 
@@ -44,6 +67,10 @@ Add ROS2 repository:
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
 ```
+Update repositories:
+```bash
+apt update
+```
 
 Install ROS2 preliminaries:
 ```bash
@@ -61,23 +88,6 @@ apt install -y \
   python3-vcstool \
   wget
 ```
-
-Install required Python3 packages:
-```bash
-python3 -m pip install -U \
-  argcomplete \
-  flake8-blind-except \
-  flake8-builtins \
-  flake8-class-newline \
-  flake8-comprehensions \
-  flake8-deprecated \
-  flake8-docstrings \
-  flake8-import-order \
-  flake8-quotes \
-  pytest-repeat \
-  pytest-rerunfailures \
-  pytest
-```
 Additional packages:
 ```bash
 apt install --no-install-recommends -y \
@@ -88,9 +98,28 @@ Numerical packages:
 ```bash
 apt install -y libeigen3-dev liblog4cxx-dev python3-numpy
 ```
+
+Install required Python3 packages. As of May 2021, Pendulum version 2.1.1 works well (source of issue: https://github.com/sdispater/pendulum/issues/504):
+```bash
+pip3 install -U \
+  argcomplete \
+  flake8-blind-except \
+  flake8-builtins \
+  flake8-class-newline \
+  flake8-comprehensions \
+  flake8-deprecated \
+  flake8-docstrings \
+  flake8-import-order \
+  flake8-quotes \
+  pytest-repeat \
+  pendulum==2.1.1 \
+  pytest-rerunfailures \
+  pytest --user worker
+```
+
 Install lark:
 ```bash
-python3 -m pip install lark
+python3 -m pip install lark --user worker
 ```
 
 ### Compiling ROS2
