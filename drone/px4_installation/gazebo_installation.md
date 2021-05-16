@@ -61,6 +61,14 @@ After the installation steps, you can build the simulation:
 ```bash
 make px4_sitl gazebo
 ```
+If you want another location, change LAT/LON/ALT coordinates (e.g. Mosonmagyaróvár has coordiantes of ```47.86789, 17.26994, 150```):
+```bash
+export PX4_HOME_LAT=28.452386
+export PX4_HOME_LON=-13.867138
+export PX4_HOME_ALT=28.5
+make px4_sitl gazebo
+```
+
 After successful build, Gazebo will automatically start. Everytime you want to start simulation, you can safely reissue the command above.
 
 If you want to use RTPS interface, issue the following command:
@@ -68,7 +76,7 @@ If you want to use RTPS interface, issue the following command:
 make px4_sitl_rtps gazebo
 ```
 
-You can interact with the Drone through the NuttX console. To start the MicroRTPS client on the system issue the following command:
+You can interact with the Drone through the NuttX console. To start the MicroRTPS client on the system issue the following command in another screen:
 ```bash
 micrortps_client start -t UDP
 ```
@@ -76,6 +84,12 @@ micrortps_client start -t UDP
 Takeoff drone:
 ```
 commander takeoff
+```
+
+### Example: use world Baylands
+The following instructions will load the Pixhawk drone with the Baylands world with RTPS support:
+```bash
+make px4_sitl_rtps gazebo___baylands
 ```
 
 ## ROS 2 interface
