@@ -99,7 +99,7 @@ Numerical packages:
 apt install -y libeigen3-dev liblog4cxx-dev python3-numpy
 ```
 
-Install required Python3 packages. As of May 2021, Pendulum version 2.1.1 works well (source of issue: https://github.com/sdispater/pendulum/issues/504):
+Install required Python3 packages:
 ```bash
 pip3 install -U \
   argcomplete \
@@ -112,14 +112,15 @@ pip3 install -U \
   flake8-import-order \
   flake8-quotes \
   pytest-repeat \
-  pendulum==2.1.1 \
+  colcon-common-extensions \
+  vcstool \
   pytest-rerunfailures \
-  pytest --user worker
+  pytest 
 ```
 
 Install lark:
 ```bash
-python3 -m pip install lark --user worker
+pip3 install lark 
 ```
 
 ### Compiling ROS2
@@ -168,9 +169,24 @@ Install the following C++ packages:
 ```
 sudo apt install -y libtinyxml2-dev
 ```
+Install lark for autocomplete:
+```
+sudo -H pip3 install lark
+```
 
 ## Variable setup
 If you encounter problem with __RMW_IMPLEMENTATION_VARIABLE__, you can use the following setup:
 ```bash
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+```
+
+## Dummy's notes
+
+### Swtich to root
+In case if you:
+- Forgot to install one package
+
+You can switch between current user and root user, by exiting shell (if you don't know the root password):
+```
+exit
 ```
