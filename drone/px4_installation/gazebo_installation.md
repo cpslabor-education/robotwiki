@@ -14,6 +14,12 @@ The following tutorials have been used:
 ## Installation
 The following steps have been tested on Ubuntu 20.04. Please don't use any kind of Ubuntu under 18.04.
 
+### Prerequisite packages
+The following packages will be required (for video streaming):
+```bash
+sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
+```
+
 ### FastRTPSGen
 FastRTPSGen is required, which is a generator tool for Micro-DDS and FastDDS. To install this tool you shall need:
 - JDK 11 (14.0.2 tested, broken as of 2021 May 07). You can switch between Java versions with the following command (in each step select the most appropriate version of JDK 11):
@@ -61,11 +67,18 @@ After the installation steps, you can build the simulation:
 ```bash
 make px4_sitl gazebo
 ```
-If you want another location, change LAT/LON/ALT coordinates (e.g. Mosonmagyaróvár has coordiantes of ```47.86789, 17.26994, 150```):
+If you want another location, change LAT/LON/ALT coordinates (e.g. Mosonmagyaróvár has coordiantes of ```47.882988237903284, 17.24929960197374, 150```):
 ```bash
 export PX4_HOME_LAT=28.452386
 export PX4_HOME_LON=-13.867138
 export PX4_HOME_ALT=28.5
+make px4_sitl gazebo
+```
+For Mosonmagyaróvár setup:
+```
+export PX4_HOME_LAT=47.882988237903284
+export PX4_HOME_LON=17.24929960197374
+export PX4_HOME_ALT=150
 make px4_sitl gazebo
 ```
 
@@ -85,6 +98,13 @@ Takeoff drone:
 ```
 commander takeoff
 ```
+
+#### Hexarotor: Video streaming example
+You can start a drone equipped with camera (from the original repository):
+```bash
+make px4_sitl_rtps gazebo_typhoon_h480__baylands
+```
+The camera feed should be available on UDP port 5600 from QGroundViewer.
 
 ### Example: use world Baylands
 The following instructions will load the Pixhawk drone with the Baylands world with RTPS support:
