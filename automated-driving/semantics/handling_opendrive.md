@@ -75,11 +75,11 @@ opendrive2lanelet-gui
 ```
 Upon successful installation, you can see the GUI itself:
 
-![alt_text](./gui_opened_success.png)
+![alt_text](./gui_opened_sucess.png)
 
 Load some XODR file. If you are lucky, you can see the following (for example _Ex_Line-Spiral-Arc.xodr_):
 
-![alt_text](./successful_opendriver2_lanelet.png)
+![alt_text](./successful_opendrive2_lanelet.png)
 
 Besides visualization, you can export an Lanelet XML geometry information from the main gui.
 
