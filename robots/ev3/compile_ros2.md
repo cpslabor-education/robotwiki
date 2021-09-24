@@ -87,7 +87,13 @@ pip3 install -U \
   colcon-common-extensions \
   vcstool \
   pytest-rerunfailures \
-  pytest 
+  pytest  
+```
+Install ROS toolchain related tools:
+```bash
+pip3 install -U \
+  colcon-common-extensions \
+  vcstool
 ```
 Install lark:
 ```bash
