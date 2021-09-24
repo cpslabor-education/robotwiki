@@ -16,7 +16,7 @@ docker tag ev3dev/ev3dev-buster-ev3-base ev3
 
 Start image:
 ```
-docker run --rm -it ev3 su -l robot
+docker run --rm -it -v "$(pwd):/home" ev3 su -l robot
 ```
 
 # Installing ROS 2
