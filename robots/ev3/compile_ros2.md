@@ -47,12 +47,14 @@ apt install -y \
   cmake \
   git \
   libbullet-dev \
+  libeigen3-dev \
   python3-flake8 \
   python3-pip \
   python3-pytest-cov \
   python3-rosdep \
   python3-setuptools \
   python3-cryptography \
+  python3-numpy \
   wget
 ```
 Additional packages:
@@ -86,6 +88,7 @@ pip3 install -U \
   pytest-repeat \
   colcon-common-extensions \
   vcstool \
+  python3-netifaces \
   pytest-rerunfailures \
   pytest  
 ```
@@ -141,8 +144,33 @@ touch src/ros2/mimick_vendor/COLCON_IGNORE && touch src/ros2/mimick_vendor/AMENT
 ```
 Start compiling the workspace. In this case, ensure __--merge-install__ is used: 
 ```bash
-colcon build --merge-install --cmake-args -DBUILD_TESTING=OFF
+colcon build --merge-install --cmake-args -DBUILD_TESTING=OFF -DCMAKE_SHARED_LINKER_FLAGS='-latomic' -DCMAKE_EXE_LINKE_FLAGS='-latomic'
 ```
+Or if you want to see full output
+```bash
+colcon build --merge-install --cmake-args -DBUILD_TESTING=OFF -DCMAKE_SHARED_LINKER_FLAGS='-latomic' -DCMAKE_EXE_LINKE_FLAGS='-latomic' --event-handlers console_direct+
+```
+### On the robot
+Install the following packages on the robot:
+```bash
+pip3 install -U \
+  argcomplete \
+  flake8-blind-except \
+  flake8-builtins \
+  flake8-class-newline \
+  flake8-comprehensions \
+  flake8-deprecated \
+  flake8-docstrings \
+  flake8-import-order \
+  flake8-quotes \
+  pytest-repeat \
+  colcon-common-extensions \
+  vcstool \
+  python3-netifaces \
+  pytest-rerunfailures \
+  pytest  
+```
+
 ### Troubleshooting
 Sometimes CUrl does not work. Use the following parameter, to download ROS keys:
 ```
