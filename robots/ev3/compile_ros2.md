@@ -99,7 +99,22 @@ Install lark:
 ```bash
 pip3 install lark 
 ```
+Install additional libraries:
+```bash
+apt install liblog4cxx-dev
+```
+Install Eigen from source:
+```bash
+mkdir /dev && cd /dev
+wget https://gitlab.com/libeigen/eigen/-/archive/3.2.10/eigen-3.2.10.zip
+unzip eigen-3.2.10.zip
+cd eigen-3.2.10.zip
+mkdir build && cd build
+cmake ..
+make install
+```
 ## Compile ROS2
+Don't forget to s
 ```bash
 mkdir -p ./ros2_foxy/src
 cd ./ros2_foxy
@@ -129,7 +144,7 @@ Start compiling the workspace. In this case, ensure __--merge-install__ is used:
 colcon build --merge-install --cmake-args -DBUILD_TESTING=OFF
 ```
 ### Troubleshooting
-SOmetimes CUrl does not work. Use the following parameter, to download ROS keys:
+Sometimes CUrl does not work. Use the following parameter, to download ROS keys:
 ```
 curl -s -k https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 ```
