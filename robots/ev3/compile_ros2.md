@@ -1,5 +1,7 @@
 # Installing ROS 2 on EV3 (using EV3DEV DOcker)
 
+Debian version: buster
+
 ## Preliminaries
 Sources:
 - https://www.ev3dev.org/
@@ -55,6 +57,7 @@ apt install -y \
   python3-setuptools \
   python3-cryptography \
   python3-numpy \
+  python3-netifaces \
   wget
 ```
 Additional packages:
@@ -88,7 +91,6 @@ pip3 install -U \
   pytest-repeat \
   colcon-common-extensions \
   vcstool \
-  python3-netifaces \
   pytest-rerunfailures \
   pytest  
 ```
@@ -150,10 +152,29 @@ Or if you want to see full output
 ```bash
 colcon build --merge-install --cmake-args -DBUILD_TESTING=OFF -DCMAKE_SHARED_LINKER_FLAGS='-latomic' -DCMAKE_EXE_LINKE_FLAGS='-latomic' --event-handlers console_direct+
 ```
-### On the robot
-Install the following packages on the robot:
+### Packages required on the robot
+Ensure you preserve links during copying this build of ROS 2.
+
+Install Python3 and the following packages as a prerequsite:
 ```bash
-pip3 install -U \
+sudo apt install --no-install-recommends -y \
+  python3 \
+  libasio-dev \
+  libtinyxml2-dev \
+  python3-netifaces \
+  python3-numpy \
+  python3-yaml \
+```
+Ensure the binaries in the ROS 2 installation folder has execuion permissions.
+
+### Optional Python3 pip installation
+Optionally install _python3 pip_ if you want to install some additional Python 3 packages:
+```
+sudo apt install python3-pip
+```
+Optionally install the following Python packages on the robot (probably not necessary as long as it is not used for development):
+```bash
+sudo -H pip3 install -U \
   argcomplete \
   flake8-blind-except \
   flake8-builtins \
@@ -164,9 +185,6 @@ pip3 install -U \
   flake8-import-order \
   flake8-quotes \
   pytest-repeat \
-  colcon-common-extensions \
-  vcstool \
-  python3-netifaces \
   pytest-rerunfailures \
   pytest  
 ```
