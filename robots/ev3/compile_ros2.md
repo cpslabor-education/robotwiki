@@ -194,3 +194,12 @@ Sometimes CUrl does not work. Use the following parameter, to download ROS keys:
 ```
 curl -s -k https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 ```
+
+
+#### Sensors not detected
+If you have installed Buster version 2020-04-10, you may not detect any plugged in sensor. This issue is known, and referenced here: https://github.com/ev3dev/ev3dev/issues/1433
+
+The authors of this page can confirm, that after dist-upgrade, the EV3 can detect sensors. This upgrades __connman__ as well, so expect connection loss during installation:
+```
+sudo apt-get update && sudo apt-get dist-upgrade
+```
