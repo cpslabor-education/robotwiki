@@ -113,7 +113,7 @@ Install Eigen from source:
 mkdir /dev && cd /dev
 wget https://gitlab.com/libeigen/eigen/-/archive/3.2.10/eigen-3.2.10.zip
 unzip eigen-3.2.10.zip
-cd eigen-3.2.10.zip
+cd eigen-3.2.10
 mkdir build && cd build
 cmake ..
 make install
